@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shruti Sharma | AI Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #03050d;
+    --surface: #0b0f1e;
+    --card: #0f1628;
+    --border: #1a2540;
+    --accent: #00e5ff;
+    --accent2: #7c3aed;
+    --accent3: #f472b6;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --glow: rgba(0, 229, 255, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    overflow-x: hidden;
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* Animated background orbs */
+  .bg-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+    animation: orbFloat 12s ease-in-out infinite;
+  }
+  .bg-orb-1 { width: 500px; height: 500px; background: rgba(0,229,255,0.05); top: -100px; left: -150px; animation-delay: 0s; }
+  .bg-orb-2 { width: 400px; height: 400px; background: rgba(124,58,237,0.06); top: 40%; right: -120px; animation-delay: -4s; }
+  .bg-orb-3 { width: 350px; height: 350px; background: rgba(244,114,182,0.04); bottom: 10%; left: 30%; animation-delay: -8s; }
+
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(30px, -20px); }
+    66% { transform: translate(-20px, 30px); }
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; width: 100%;
+    z-index: 100;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(3,5,13,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-logo span { color: var(--text); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+
+  nav ul a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  nav ul a:hover { color: var(--accent); }
+
+  .nav-social {
+    display: flex;
+    gap: 14px;
+  }
+
+  .nav-social a {
+    color: var(--muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+
+  .nav-social a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--glow);
+  }
+
+  /* HERO */
+  header {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 80px 80px;
+    overflow: hidden;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -3px;
+    margin-bottom: 24px;
+  }
+
+  .hero-name .line2 {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(0,229,255,0.5);
+  }
+
+  .hero-desc {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    padding: 14px 32px;
+    background: var(--accent);
+    color: #000;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+  }
+
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+
+  .btn-outline {
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--glow);
+  }
+
+  .hero-grid-line {
+    position: absolute;
+    right: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .hero-stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 130px;
+  }
+
+  .hero-stat .num {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-stat .lbl {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* SECTIONS */
+  .section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 80px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '//';
+    opacity: 0.5;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    margin-bottom: 50px;
+    line-height: 1.1;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+
+  .about-text p strong {
+    color: var(--text);
+  }
+
+  .about-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .badge-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 18px 22px;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .badge-item .badge-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .badge-item .badge-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .skill-category {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    transition: all 0.3s;
+  }
+
+  .skill-category:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 30px var(--glow);
+    transform: translateY(-3px);
+  }
+
+  .skill-cat-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-tag {
+    font-size: 12px;
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    background: var(--glow);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.4s;
+    position: relative;
+  }
+
+  .project-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--glow);
+  }
+
+  .project-header {
+    padding: 28px 28px 20px;
+    position: relative;
+  }
+
+  .project-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  .project-tech {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .project-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    padding: 0 28px 28px;
+  }
+
+  .project-metrics {
+    display: flex;
+    gap: 16px;
+    padding: 16px 28px;
+    border-top: 1px solid var(--border);
+    background: rgba(0,0,0,0.2);
+  }
+
+  .metric {
+    text-align: center;
+    flex: 1;
+  }
+
+  .metric .val {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
+
+  .metric .key {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* EXPERIENCE */
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .exp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: start;
+    transition: all 0.3s;
+  }
+
+  .exp-card:hover {
+    border-color: rgba(0,229,255,0.3);
+    box-shadow: 0 0 30px var(--glow);
+  }
+
+  .exp-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 6px;
+    box-shadow: 0 0 12px var(--accent);
+    flex-shrink: 0;
+  }
+
+  .exp-company {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .exp-role {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .exp-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .exp-points li {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  .exp-points li::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-size: 12px;
+  }
+
+  .exp-badge {
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.2);
+    color: var(--accent);
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    height: fit-content;
+  }
+
+  /* ACHIEVEMENTS */
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .achievement-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .achievement-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent), var(--accent3));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .achievement-card:hover::before { opacity: 1; }
+
+  .achievement-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    border-color: rgba(0,229,255,0.2);
+  }
+
+  .achievement-icon {
+    font-size: 36px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .achievement-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .achievement-sub {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* CONTACT */
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .contact-info p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 30px;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 13px;
+    transition: all 0.3s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    background: var(--glow);
+    color: var(--accent);
+    transform: translateX(6px);
+  }
+
+  .contact-link .link-icon {
+    font-size: 20px;
+    width: 28px;
+    text-align: center;
+  }
+
+  .contact-link .link-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+  }
+
+  .contact-link .link-value {
+    font-size: 13px;
+    color: inherit;
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  footer span {
+    color: var(--accent);
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section { animation: fadeUp 0.6s ease both; }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 900px) {
+    nav ul { display: none; }
+    header { padding: 120px 30px 60px; }
+    .hero-grid-line { display: none; }
+    .section { padding: 60px 30px; }
+    .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 30px; }
+    .exp-card { grid-template-columns: auto 1fr; }
+    .exp-badge { display: none; }
+    .nav-social a span { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+<div class="bg-orb bg-orb-3"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SS<span>.</span></div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-social">
+    <a href="https://github.com/shrutiishar" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      <span>GitHub</span>
+    </a>
+    <a href="https://www.linkedin.com/in/shruti-sharma-202277220/" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+      <span>LinkedIn</span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header>
+  <div class="hero-tag">AI / ML Engineer</div>
+  <h1 class="hero-name">
+    Shruti<br>
+    <span class="line2">Sharma</span>
+  </h1>
+  <p class="hero-desc">
+    Building intelligent systems at the intersection of <strong>Generative AI, Deep Learning, and scalable backend engineering</strong>. From deepfake detection to real-time computer vision — I ship production-ready ML.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn-primary">View Projects</a>
+    <a href="https://github.com/shrutiishar" target="_blank" class="btn-outline">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/shruti-sharma-202277220/" target="_blank" class="btn-outline">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+      LinkedIn
+    </a>
+  </div>
+
+  <div class="hero-grid-line">
+    <div class="hero-stat"><span class="num">92%</span><span class="lbl">IBM Accuracy</span></div>
+    <div class="hero-stat"><span class="num">150+</span><span class="lbl">DSA Solved</span></div>
+    <div class="hero-stat"><span class="num">40%</span><span class="lbl">Effort Reduced</span></div>
+    <div class="hero-stat"><span class="num">28%</span><span class="lbl">Throughput ↑</span></div>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-label">Profile</div>
+  <h2 class="section-title">About Me</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Results-driven <strong>AI/ML Engineer</strong> with deep expertise in Machine Learning, Deep Learning, Generative AI, and scalable backend systems. I've built production-ready systems spanning deepfake detection, real-time computer vision, and multimodal AI pipelines.</p>
+      <p>Strong foundation in <strong>Data Structures, Algorithms, and System Design</strong> paired with hands-on experience in cloud deployment, performance optimization, and blockchain-integrated architectures.</p>
+      <p>I thrive at the intersection of research and engineering — turning cutting-edge AI concepts into <strong>reliable, high-impact systems</strong>.</p>
+    </div>
+    <div class="about-badges">
+      <div class="badge-item">
+        <div class="badge-val">IBM Certified</div>
+        <div class="badge-label">AI & Cloud Professional</div>
+      </div>
+      <div class="badge-item">
+        <div class="badge-val">SIH Semi-Finalist</div>
+        <div class="badge-label">Smart India Hackathon</div>
+      </div>
+      <div class="badge-item">
+        <div class="badge-val">Open Source</div>
+        <div class="badge-label">Active Mentor & Contributor</div>
+      </div>
+      <div class="badge-item">
+        <div class="badge-val">2 Internships</div>
+        <div class="badge-label">IBM · Hux Tech</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-label">Expertise</div>
+  <h2 class="section-title">Technical Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <div class="skill-cat-title">⚡ Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">SQL</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-title">🧠 AI / ML</div>
+      <div class="skill-tags">
+        <span class="skill-tag">TensorFlow</span>
+        <span class="skill-tag">PyTorch</span>
+        <span class="skill-tag">Deep Learning</span>
+        <span class="skill-tag">NLP</span>
+        <span class="skill-tag">Generative AI</span>
+        <span class="skill-tag">RAG</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-title">👁️ Vision & CV</div>
+      <div class="skill-tags">
+        <span class="skill-tag">OpenCV</span>
+        <span class="skill-tag">YOLOv8</span>
+        <span class="skill-tag">EfficientNet</span>
+        <span class="skill-tag">Computer Vision</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-title">☁️ Infrastructure</div>
+      <div class="skill-tags">
+        <span class="skill-tag">AWS</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Linux</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-title">🏗️ Engineering</div>
+      <div class="skill-tags">
+        <span class="skill-tag">System Design</span>
+        <span class="skill-tag">DSA</span>
+        <span class="skill-tag">DBMS</span>
+        <span class="skill-tag">Blockchain</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-title">🤖 Specializations</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Multimodal AI</span>
+        <span class="skill-tag">Reinforcement Learning</span>
+        <span class="skill-tag">OCR</span>
+        <span class="skill-tag">Scalable Pipelines</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-label">Work</div>
+  <h2 class="section-title">Featured Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-icon">🚦</span>
+        <div class="project-title">AI Traffic Signal Control</div>
+        <div class="project-tech">YOLOv8 · Reinforcement Learning · Blockchain · OCR</div>
+      </div>
+      <p class="project-desc">Real-time computer vision system with intelligent signal optimization. Integrated OCR for license plate recognition and blockchain for immutable logging. Deployed end-to-end with measurable performance gains.</p>
+      <div class="project-metrics">
+        <div class="metric"><span class="val">26%</span><span class="key">Wait Time ↓</span></div>
+        <div class="metric"><span class="val">28%</span><span class="key">Throughput ↑</span></div>
+        <div class="metric"><span class="val">Real-time</span><span class="key">CV Pipeline</span></div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-icon">🔍</span>
+        <div class="project-title">Deepfake Detection & Face Recognition</div>
+        <div class="project-tech">EfficientNetB4 · Secure Logging · Blockchain</div>
+      </div>
+      <p class="project-desc">End-to-end deepfake detection pipeline with high-accuracy face recognition. Blockchain-based audit trail for tamper-proof logging. Optimized inference pipeline for real-world deployment scenarios.</p>
+      <div class="project-metrics">
+        <div class="metric"><span class="val">High</span><span class="key">Accuracy</span></div>
+        <div class="metric"><span class="val">Secure</span><span class="key">Logging</span></div>
+        <div class="metric"><span class="val">Optimized</span><span class="key">Inference</span></div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-icon">🎙️</span>
+        <div class="project-title">Voice-to-Image Generative AI</div>
+        <div class="project-tech">Multimodal AI · Generative Models · Speech Processing</div>
+      </div>
+      <p class="project-desc">Multimodal pipeline converting spoken voice inputs into contextually relevant images. Bridges the gap between audio and visual modalities, dramatically reducing creative effort while showcasing the power of generative AI.</p>
+      <div class="project-metrics">
+        <div class="metric"><span class="val">40%</span><span class="key">Effort ↓</span></div>
+        <div class="metric"><span class="val">Multi</span><span class="key">Modal</span></div>
+        <div class="metric"><span class="val">GenAI</span><span class="key">Pipeline</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="section-label">Career</div>
+  <h2 class="section-title">Experience</h2>
+  <div class="experience-list">
+
+    <div class="exp-card">
+      <div class="exp-dot"></div>
+      <div>
+        <div class="exp-company">IBM</div>
+        <div class="exp-role">AI & Cloud Intern</div>
+        <ul class="exp-points">
+          <li>Achieved 92% model accuracy on production AI workloads</li>
+          <li>Improved automation efficiency by 40% through optimized pipelines</li>
+          <li>Designed and deployed scalable ML infrastructure on cloud</li>
+          <li>Collaborated with cross-functional teams on enterprise AI solutions</li>
+        </ul>
+      </div>
+      <div class="exp-badge">IBM Certified</div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-dot" style="background: var(--accent2); box-shadow: 0 0 12px var(--accent2);"></div>
+      <div>
+        <div class="exp-company">Hux Tech</div>
+        <div class="exp-role">Machine Learning Intern</div>
+        <ul class="exp-points">
+          <li>Boosted user engagement metrics by 15% through ML-driven personalization</li>
+          <li>Reduced data processing time by 30% via pipeline optimization</li>
+          <li>Built and evaluated multiple ML models for production deployment</li>
+        </ul>
+      </div>
+      <div class="exp-badge">ML Engineering</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section class="section" id="achievements">
+  <div class="section-label">Recognition</div>
+  <h2 class="section-title">Achievements</h2>
+  <div class="achievements-grid">
+    <div class="achievement-card">
+      <span class="achievement-icon">💡</span>
+      <div class="achievement-title">150+ DSA Problems</div>
+      <div class="achievement-sub">Solved across LeetCode, GFG, and competitive programming platforms</div>
+    </div>
+    <div class="achievement-card">
+      <span class="achievement-icon">🏆</span>
+      <div class="achievement-title">SIH Semi-Finalist</div>
+      <div class="achievement-sub">Smart India Hackathon — national-level innovation challenge</div>
+    </div>
+    <div class="achievement-card">
+      <span class="achievement-icon">🌐</span>
+      <div class="achievement-title">Open Source Mentor</div>
+      <div class="achievement-sub">Active contributor and mentor in the open source AI community</div>
+    </div>
+    <div class="achievement-card">
+      <span class="achievement-icon">🎓</span>
+      <div class="achievement-title">IBM Certified</div>
+      <div class="achievement-sub">Certified AI & Cloud professional by IBM</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-label">Connect</div>
+  <h2 class="section-title">Get In Touch</h2>
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <p>I'm open to new opportunities, collaborations, and interesting AI/ML projects. Whether you have a question, a proposal, or just want to say hello — feel free to reach out.</p>
+      <p>Currently exploring roles in <strong>AI Engineering, ML Research, and Backend Engineering</strong>.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:shruti0701shar@gmail.com" class="contact-link">
+        <span class="link-icon">✉️</span>
+        <div>
+          <span class="link-label">Email</span>
+          <span class="link-value">shruti0701shar@gmail.com</span>
+        </div>
+      </a>
+      <a href="https://github.com/shrutiishar" target="_blank" class="contact-link">
+        <span class="link-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </span>
+        <div>
+          <span class="link-label">GitHub</span>
+          <span class="link-value">github.com/shrutiishar</span>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/shruti-sharma-202277220/" target="_blank" class="contact-link">
+        <span class="link-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </span>
+        <div>
+          <span class="link-label">LinkedIn</span>
+          <span class="link-value">shruti-sharma-202277220</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Designed by <span>Shruti Sharma</span>
+</footer>
+
+</body>
+</html>
